@@ -2,17 +2,22 @@ const inquirer = require('inquirer');
 const { writeFile } = require('fs').promises;
 const { Circle, Triangle, Square } = require('./lib/shapes');
 
+function isValidColor(color) {
+  return /^#[0-9A-F]{6}$/i.test(color) || /^[a-z]+$/i.test(color);
+}
+
 const questions = [
   {
     type: 'input',
     name: 'text',
     message: 'Enter up to three characters:',
-    validate: input => input.length <= 3 || 'Please enter up to three characters only.'
+    validate: input => input.length <= 3 && input.length > 0 || 'Please enter 1 to 3 characters.'
   },
   {
     type: 'input',
     name: 'textColor',
-    message: 'Enter the text color (keyword or hexadecimal):'
+    message: 'Enter the text color (keyword or hexadecimal):',
+    validate: input => isValidColor(input) || 'Please enter a valid color keyword or hexadecimal value.'
   },
   {
     type: 'list',
@@ -23,7 +28,8 @@ const questions = [
   {
     type: 'input',
     name: 'shapeColor',
-    message: 'Enter the shape color (keyword or hexadecimal):'
+    message: 'Enter the shape color (keyword or hexadecimal):',
+    validate: input => isValidColor(input) || 'Please enter a valid color keyword or hexadecimal value.'
   }
 ];
 
@@ -43,7 +49,7 @@ function generateSVG(answers) {
   shape.setColor(answers.shapeColor);
 
   return `
-    <svg width="300" height="200" xmlns="http://www.w3.org/2000/svg">
+    <svg width="300" height="200" viewBox="0 0 300 200" xmlns="http://www.w3.org/2000/svg">
       ${shape.render()}
       <text x="150" y="125" font-size="60" text-anchor="middle" fill="${answers.textColor}">${answers.text}</text>
     </svg>
