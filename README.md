@@ -8,6 +8,7 @@ The SVG Logo Maker is a Node.js command-line application designed for freelance 
 
 - [Installation](#installation)
 - [Usage](#usage)
+- [Demonstration](#demonstration)
 - [Tests](#tests)
 - [Questions](#questions)
 
@@ -44,7 +45,7 @@ node index.js
 
 ## Demonstration:
 
-XX
+https://github.com/user-attachments/assets/5b1f4715-3eb2-4003-9c42-b00c667aae98
 
 ## Tests
 
